@@ -1,0 +1,20 @@
+{
+  "name": "myblog",
+  "version": "1.0.0",
+  "description": "myblog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "fluent-ffmpeg": "^2.1.2",
+    "md5-nodejs": "^1.0.3",
+    "mongoose": "^5.13.2",
+    "nanoid": "^3.1.23",
+    "nodemon": "^2.0.12"
+  }
+}
