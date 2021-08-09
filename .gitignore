@@ -3,4 +3,5 @@ node_modules
 dist
 dist-ssr
 *.local
-public
+public/article_album
+public/video

@@ -19,7 +19,7 @@ function updateVideo(){
   isFileChange.forEach(el=> {
     if(!(el=='files.txt'||el=='git.txt'||el=='screenshot'))
     {
-      const command = `ffmpeg -ss 00:00:10 -i public\\video\\${el} public\\video\\screenshot\\${el}.jpg`
+      const command = `ffmpeg -ss 00:00:10 -i public\\video\\${el}  public\\video\\screenshot\\${md5(el)}.jpg`
       exec(command,(error, stdout, stderr)=>{    
       fs.writeFileSync('public/video/git.txt',md5(fileBuffer)) //写入状态文件
       fs.writeFileSync('public/video/files.txt',fileBuffer.join("*&*")) //写入文件名记录文件
@@ -29,7 +29,7 @@ function updateVideo(){
       // Videos
       const videoId = md5(el)
       const videoPath = BASE_URL + `/public/video/${el}`
-      const titleImagePath = BASE_URL + `/public/video/screenshot/${el}.jpg`
+      const titleImagePath = BASE_URL + `/public/video/screenshot/${md5(el)}.jpg`
       const videoTitle = el.slice(0,el.lastIndexOf('.'))//截取取得文件名
       const video = {videoId,videoPath,titleImagePath,videoTitle}
       const newuser=new Videos(video)//新建一个video对象

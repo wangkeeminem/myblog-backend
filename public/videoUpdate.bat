@@ -1,0 +1,1 @@
+cd  ..&&node utils\videoImageBuild.js
