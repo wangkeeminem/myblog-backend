@@ -5,7 +5,8 @@ const Article = require('../models/article.js')
 
 const BASE_URL = require('./config')
 
-
+const deleteImage = require('../utils/deleteImage')
+const findByIDandDeleteImage = require ('../utils/findByIDandDeleteImage')
 module.exports=function publishArticle(req,res){
   const body = req.body
   const imgreg= new RegExp(`"data:image/.*?"`,'g')
@@ -36,7 +37,11 @@ if(imagePathList.length!=0)//将其添加到自己的属性中
 body.imagePathList=imagePathList
 // console.log(imagePathList);
 // console.log(typeof(body));
+
+
 if (body.editArticleId)//如果editArticleId已存在 ，那么更新（是编辑后的文章）
+{ //先进行图像list的处理
+findByIDandDeleteImage(body.editArticleId,imagePathList,body,res)//执行删除任务
 Article.findOneAndUpdate({'_id':body.editArticleId},body).then((resolve,reject)=>{
   if (reject) {
     console.log('hahahhaha');
@@ -45,7 +50,8 @@ Article.findOneAndUpdate({'_id':body.editArticleId},body).then((resolve,reject)=
       message: 'Server error'
     })       
   }
-  else {
+  else if(resolve){
+
     res.status(200).json({
       err_code: 0,//没有问题
       message:'Register Sucessed',
@@ -53,7 +59,9 @@ Article.findOneAndUpdate({'_id':body.editArticleId},body).then((resolve,reject)=
     })      
   }
 })
-  
+ 
+}
+//如果editArticleId不存在 正常添加文章
 else{
 const newarticle = new Article(body)
   newarticle.save().then((resolve,reject)=>{
@@ -75,3 +83,5 @@ const newarticle = new Article(body)
 }
 
 }
+
+  

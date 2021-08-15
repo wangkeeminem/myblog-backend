@@ -1,4 +1,5 @@
 const Article = require('../models/article.js')
+const PAGE_SIZE = 6
 module.exports = function searchforArticle (req,res){
   const body = req.body
   const reg = new RegExp(body.content,'ig')
