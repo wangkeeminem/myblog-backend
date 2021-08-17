@@ -28,8 +28,8 @@ function updateVideo(){
       console.log('已更新:',el);
       // Videos
       const videoId = md5(el)
-      const videoPath = BASE_URL + `/public/video/${el}`
-      const titleImagePath = BASE_URL + `/public/video/screenshot/${md5(el)}.jpg`
+      const videoPath = BASE_URL + `public/video/${el}`
+      const titleImagePath = BASE_URL + `public/video/screenshot/${md5(el)}.jpg`
       const videoTitle = el.slice(0,el.lastIndexOf('.'))//截取取得文件名
       const video = {videoId,videoPath,titleImagePath,videoTitle}
       const newuser=new Videos(video)//新建一个video对象
